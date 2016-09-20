@@ -42,7 +42,12 @@ CODE=$(echo "$CODE" | sed "s/--API_KEY--/$API_KEY/g")
 CODE=$(echo "$CODE" | sed 's#--PLIST--#'$PLIST_PATH'#g')
 echo -e "$CODE" >> $FILE
 
+echo "Making file executable: "
 chmod +x $FILE
+printf "Done"
+echo ""
+echo ""
+
 
 echo -e "${RED}BumpUp!${NC} has been ${RED}installed${NC}. Please ${RED}use${NC} ${RED}./BumpUp.sh${NC} to bump up the version from now on. It holds both, your API key as well as the path to your Info.plist file."
 echo ""

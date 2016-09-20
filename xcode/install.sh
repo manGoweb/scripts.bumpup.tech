@@ -29,9 +29,9 @@ fi
 
 
 echo "Downloading code: "
-CODE="$(curl --request POST -sSL 'goo.gl/wghTYC')"
+CODE="$(curl --request GET -H 'Cache-Control: no-cache' -sSL 'https://raw.githubusercontent.com/manGoweb/scripts.bumpup.tech/master/xcode/template.txt')"
 printf "Done"
-echo -e "\n"
+echo ""
 
 
 FILE="./BumpUp.sh"

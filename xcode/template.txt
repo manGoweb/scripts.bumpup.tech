@@ -9,7 +9,7 @@ clear
 printf "${RED}Starting BumpUp.tech update${NC}"
 echo ""
 
-API_KEY="{{API_KEY}}"
+API_KEY="--API_KEY--"
 
 if [ -z "$API_KEY" ]; then
    echo "API key can not be empty"
@@ -17,7 +17,7 @@ if [ -z "$API_KEY" ]; then
    exit
 fi
 
-PLIST_PATH="{{PLIST_PATH}}"
+PLIST_PATH="--PLIST--"
 
 if [ -z "$PLIST_PATH" ]; then
    echo "Path to the a plist file needs to be set"

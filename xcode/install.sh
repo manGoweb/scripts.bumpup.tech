@@ -29,17 +29,19 @@ fi
 
 
 echo "Downloading code: "
-CODE="$(curl --request POST -sSL 'http://localhost/bumpup.tech/scripts/xcode/template.txt')"
+CODE="$(curl --request POST -sSL 'goo.gl/wghTYC')"
 printf "Done"
-echo "\n"
+echo -e "\n"
 
 
-FILE="./BupmpUp.sh"
+FILE="./BumpUp.sh"
 
 rm -rf $FILE
-echo $CODE >> $FILE
+CODE=$(echo "$CODE" | sed "s/--API_KEY--/$API_KEY/g")
+CODE=$(echo "$CODE" | sed 's#--PLIST--#'$PLIST_PATH'#g')
+echo -e "$CODE" >> $FILE
 
-echo "BumpUp! has been installed. Please use ./build.sh XXXX-XXXXX-XXXXX ./Info.plist to update your version number"
+echo -e "${RED}BumpUp!${NC} has been ${RED}installed${NC}. Please ${RED}use${NC} ${RED}./BumpUp.sh${NC} to bump up the version from now on. It holds both, your API key as well as the path to your Info.plist file."
 echo ""
 
 exit

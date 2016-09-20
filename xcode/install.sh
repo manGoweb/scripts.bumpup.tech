@@ -32,6 +32,7 @@ echo "Downloading code: "
 CODE="$(curl --request GET -H 'Cache-Control: no-cache' -sSL 'https://raw.githubusercontent.com/manGoweb/scripts.bumpup.tech/master/xcode/template.txt?aa')"
 printf "Done"
 echo ""
+echo ""
 
 
 FILE="./BumpUp.sh"

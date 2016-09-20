@@ -52,9 +52,15 @@ CPAR_API_KEY="token=$API_KEY"
 CPAR_PRODUCT_BUNDLE_IDENTIFIER="bundle=$PRODUCT_BUNDLE_IDENTIFIER"
 CPAR_FORMAT="plain=1"
 NEW_BUILD_NO="$(curl --request POST -sSL 'http://www.bumpup.tech/api.php' --data $CPAR_BUILD_NO --data $CPAR_API_KEY --data $CPAR_PRODUCT_BUNDLE_IDENTIFIER --data $CPAR_FORMAT)"
-printf "Updated version: "
+if [ -z "$NEW_BUILD_NO" ]; then
+   echo "You are not connected to the internet. Your build number has been only modified locally\n"
+   NEW_BUILD_NO=$(($BUILD_NO + 1))
+fi
+
+printf "New build number is: ${RED}"
 echo $NEW_BUILD_NO
-echo ""
+echo "${NC}"
+
 
 SET_OUTPUT="$(/usr/libexec/PlistBuddy -c 'Set CFBundleVersion '$NEW_BUILD_NO $PLIST_PATH)"
 echo "Plist has been updated"

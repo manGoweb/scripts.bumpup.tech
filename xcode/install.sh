@@ -28,10 +28,9 @@ if [ -z "$PLIST_PATH" ]; then
 fi
 
 
-echo "Downloading code: "
+printf "Downloading code: "
 CODE="$(curl --request GET -H 'Cache-Control: no-cache' -sSL 'https://raw.githubusercontent.com/manGoweb/scripts.bumpup.tech/master/xcode/template.txt?aa')"
-printf "Done"
-echo ""
+echo "Done"
 echo ""
 
 
@@ -42,10 +41,9 @@ CODE=$(echo "$CODE" | sed "s/--API_KEY--/$API_KEY/g")
 CODE=$(echo "$CODE" | sed 's#--PLIST--#'$PLIST_PATH'#g')
 echo -e "$CODE" >> $FILE
 
-echo "Making file executable: "
+printf "Making file executable: "
 chmod +x $FILE
-printf "Done"
-echo ""
+echo "Done"
 echo ""
 
 

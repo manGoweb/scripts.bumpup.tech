@@ -29,12 +29,12 @@ fi
 
 
 printf "Downloading code: "
-CODE="$(curl --request GET -H 'Cache-Control: no-cache' -sSL 'https://raw.githubusercontent.com/manGoweb/scripts.bumpup.tech/master/xcode/template.txt?aa')"
+CODE="$(curl --request GET -H 'Cache-Control: no-cache' -sSL 'https://raw.githubusercontent.com/manGoweb/scripts.bumpup.tech/master/xcode/template.sh')"
 echo "Done"
 echo ""
 
 
-FILE="./BumpUp.sh"
+FILE="./bumpup.sh"
 
 rm -rf $FILE
 CODE=$(echo "$CODE" | sed "s/--API_KEY--/$API_KEY/g")

@@ -48,7 +48,7 @@ echo "Done"
 echo ""
 
 
-echo -e "${RED}BumpUp!${NC} has been ${RED}installed${NC}. Please ${RED}use${NC} ${RED}./BumpUp.sh${NC} to bump up the version from now on. It holds both, your API key as well as the path to your Info.plist file."
+echo -e "${RED}BumpUp!${NC} has been ${RED}installed${NC}. Please ${RED}use${NC} your newly generated ${RED}./bumpup.sh${NC} to bump up the version from now on. It holds both, your API key as well as the path to your Info.plist file."
 echo ""
 
 exit

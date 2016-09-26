@@ -15,7 +15,7 @@ PLIST_PATH=$1
 
 if [ -z "$PLIST_PATH" ]; then
    echo "Path to the a plist file needs to be set"
-   echo $EXAMPLE
+   echo -e $EXAMPLE
    exit
 fi
 
@@ -40,7 +40,7 @@ FILE="./bumpup.sh"
 rm -rf $FILE
 CODE=$(echo "$CODE" | sed "s/--API_KEY--/$API_KEY/g")
 CODE=$(echo "$CODE" | sed 's#--PLIST--#'$PLIST_PATH'#g')
-echo "$CODE" >> $FILE
+echo -e "$CODE" >> $FILE
 
 printf "Making file executable: "
 chmod +x $FILE
@@ -48,7 +48,7 @@ echo "Done"
 echo ""
 
 
-echo "${RED}BumpUp!${NC} has been ${RED}installed${NC}. Please ${RED}use${NC} ${RED}./BumpUp.sh${NC} to bump up the version from now on. It holds both, your API key as well as the path to your Info.plist file."
+echo -e "${RED}BumpUp!${NC} has been ${RED}installed${NC}. Please ${RED}use${NC} ${RED}./BumpUp.sh${NC} to bump up the version from now on. It holds both, your API key as well as the path to your Info.plist file."
 echo ""
 
 exit

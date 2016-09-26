@@ -41,7 +41,6 @@ printf "Local build number is: "
 echo $BUILD_NO
 echo ""
 
-PRODUCT_BUNDLE_IDENTIFIER="$(/usr/libexec/PlistBuddy -c "Print CFBundleIdentifier" $PLIST_PATH)"
 echo "Bundle identifier:"
 echo $PRODUCT_BUNDLE_IDENTIFIER
 echo ""

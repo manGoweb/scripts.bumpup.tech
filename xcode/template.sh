@@ -13,7 +13,7 @@ API_KEY="--API_KEY--"
 
 if [ -z "$API_KEY" ]; then
    echo "API key can not be empty"
-   echo -e $EXAMPLE
+   echo $EXAMPLE
    exit
 fi
 
@@ -21,7 +21,7 @@ PLIST_PATH="--PLIST--"
 
 if [ -z "$PLIST_PATH" ]; then
    echo "Path to the a plist file needs to be set"
-   echo -e $EXAMPLE
+   echo $EXAMPLE
    exit
 fi
 

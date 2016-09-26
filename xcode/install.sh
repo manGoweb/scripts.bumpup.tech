@@ -6,7 +6,7 @@ NC='\033[0m' # No Color
 
 clear
 
-EXAMPLE="Example: ${RED}bash <(curl -sSL 'goo.gl/wghTYC') ./Info.plist XXXX-XXXX-XXXXX-XXXX${NC}"
+EXAMPLE="Example: ${RED}bash <(curl -sSL 'goo.gl/wghTYC') ./Info.plist XXXX-API-KEY-XXXXX-XXXX${NC}"
 
 printf "${RED}Starting BumpUp! installation${NC}"
 echo ""

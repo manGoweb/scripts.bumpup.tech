@@ -24,7 +24,7 @@ API_KEY=$2
 
 if [ -z "$API_KEY" ]; then
    CPAR_FORMAT="plain=1"
-   API_KEY="$(curl --request POST -sSL 'http://www.bumpup.tech/api/token' --data $CPAR_FORMAT)"
+   API_KEY="$(curl --request POST -sSL 'http://www.bumpup.tech/v1/token' --data $CPAR_FORMAT)"
    printf "Using newly generated API key: "
    echo $API_KEY
 fi

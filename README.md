@@ -1,4 +1,4 @@
-# scripts.bumpup.tech
+# BumpUp!
 #### Build number management in the cloud!
 BumpUp! provides a way to manage your build numbers always up-to-date and and in sync with other team member or your CI. Generate your API key and follow instructions on how to integrate with your iOS or Android app. Obviously that is not all, our API is open, you can integrate BumpUp into any system or procedure.
 

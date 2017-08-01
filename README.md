@@ -1,4 +1,7 @@
 # BumpUp!
+===========
+[![Twitter: @BumpUp_tech](https://img.shields.io/badge/contact-@BumpUp_tech-blue.svg?style=flat)](https://twitter.com/BumpUp_tech)
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/fastlane/fastlane/blob/master/LICENSE)
 #### Build number management in the cloud!
 BumpUp! provides a way to manage your build numbers always up-to-date and and in sync with other team member or your CI. Generate your API key and follow instructions on how to integrate with your iOS or Android app. Obviously that is not all, our API is open, you can integrate BumpUp into any system or procedure.
 

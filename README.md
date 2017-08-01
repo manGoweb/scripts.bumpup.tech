@@ -1,5 +1,6 @@
-# BumpUp!
-===========
+BumpUp!
+============
+
 [![Twitter: @BumpUp_tech](https://img.shields.io/badge/contact-@BumpUp_tech-blue.svg?style=flat)](https://twitter.com/BumpUp_tech)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/fastlane/fastlane/blob/master/LICENSE)
 #### Build number management in the cloud!

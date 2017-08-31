@@ -20,23 +20,27 @@ final class Token: Model, NodeInitializable {
     var token: String
     var build: Int
     var added: Date
+    var appId: Identifier
     
     static let idKey = "id"
-    static let bundleKey = "bundle"
+    static let tokenKey = "token"
     static let buildKey = "build"
+    static let appIdKey = App.foreignIdKey
     static let addedKey = "added"
     
     
     // Creates a new entry
-    init(bundle: String, build: Int, added: Date) {
-        self.token = bundle
+    init(token: String, build: Int, appId: Identifier, added: Date) {
+        self.token = token
         self.build = build
         self.added = added
+        self.appId = appId
     }
     
     init(node: Node) throws {
-        token = try node.get(Token.bundleKey)
+        token = try node.get(Token.tokenKey)
         build = try node.get(Token.buildKey)
+        appId = try node.get(Token.appIdKey)
         added = try node.get(Token.addedKey)
         
         exists = true
@@ -47,18 +51,36 @@ final class Token: Model, NodeInitializable {
     
     // Initializes an entry from the database row
     init(row: Row) throws {
-        token = try row.get(Token.bundleKey)
+        token = try row.get(Token.tokenKey)
         build = try row.get(Token.buildKey)
+        appId = try row.get(Token.appIdKey)
         added = try row.get(Token.addedKey)
     }
     
     // Serializes the entry to the database
     func makeRow() throws -> Row {
         var row = Row()
-        try row.set(Token.bundleKey, token)
+        try row.set(Token.tokenKey, token)
         try row.set(Token.buildKey, build)
+        try row.set(Token.appIdKey, appId)
         try row.set(Token.addedKey, added)
         return row
+    }
+    
+}
+
+// MARK: Helpers
+
+extension Token {
+    
+    static func find(token: String) throws -> Token? {
+        let query = try Token.makeQuery()
+        try query.filter(Token.tokenKey, .equals, token)
+        return try query.first()
+    }
+
+    func app() throws -> Parent<Token, App> {
+        return parent(id: appId)
     }
     
 }
@@ -69,18 +91,23 @@ extension Token: JSONConvertible {
     
     convenience init(json: JSON) throws {
         try self.init(
-            bundle: json.get(Token.bundleKey),
+            token: json.get(Token.tokenKey),
             build: json.get(Token.buildKey),
+            appId: json.get(Token.appIdKey),
             added: json.get(Token.addedKey)
         )
     }
     
+    func makeFullJSON() throws -> JSON {
+        var json = JSON()
+        try json.set(Token.tokenKey, token)
+        try json.set(Token.buildKey, build)
+        return json
+    }
+    
     func makeJSON() throws -> JSON {
         var json = JSON()
-        try json.set("id", id)
-        try json.set(Token.bundleKey, token)
         try json.set(Token.buildKey, build)
-        try json.set(Token.addedKey, added)
         return json
     }
     
@@ -93,7 +120,7 @@ extension Token: Updateable {
     // Add as many updateable keys as you like here.
     public static var updateableKeys: [UpdateableKey<Token>] {
         return [
-            UpdateableKey(Token.bundleKey, String.self) { token, content in
+            UpdateableKey(Token.tokenKey, String.self) { token, content in
                 token.token = content
             }
         ]
@@ -107,8 +134,9 @@ extension Token: Preparation {
     static func prepare(_ database: Database) throws {
         try database.create(self) { builder in
             builder.id()
-            builder.string(Token.bundleKey)
+            builder.string(Token.tokenKey)
             builder.int(Token.buildKey)
+            builder.foreignId(for: App.self)
             builder.date(Token.addedKey)
         }
     }

@@ -1,0 +1,266 @@
+{
+	"variables": [],
+	"info": {
+		"name": "BumpUp!",
+		"_postman_id": "14963b7e-2f81-ccc6-6063-bbff7642c2c8",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Generate token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"// Status code",
+							"tests[\"Status code is 201\"] = responseCode.code === 201;",
+							"",
+							"// Token check",
+							"tests[\"Token is present\"] = (jsonData[\"token\"].length > 0)",
+							"",
+							"postman.setEnvironmentVariable(\"TOKEN\", jsonData[\"token\"]);",
+							"postman.setEnvironmentVariable(\"BUILD\", jsonData[\"build\"]);",
+							"",
+							"// Content type",
+							"tests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");",
+							"tests[\"Content-Type is correct\"] = (postman.getResponseHeader(\"Content-Type\") == \"application/json; charset=utf-8\");",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "{{SERVER}}token?bundle={{BUNDLE_ID}}&plain={{PLAIN}}",
+					"host": [
+						"{{SERVER}}token"
+					],
+					"query": [
+						{
+							"key": "bundle",
+							"value": "{{BUNDLE_ID}}",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "plain",
+							"value": "{{PLAIN}}",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Increment build number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"// Status code",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var currentBuild = postman.getEnvironmentVariable(\"BUILD\")",
+							"",
+							"// Token check",
+							"tests[\"Build is bigger than 0\"] = (jsonData[\"build\"] > 0)",
+							"tests[\"Build is bigger than {{BUILD}}\"] = (jsonData[\"build\"] > currentBuild)",
+							"",
+							"postman.setEnvironmentVariable(\"BUILD\", (jsonData[\"build\"] + 10));",
+							"",
+							"// Content type",
+							"tests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");",
+							"tests[\"Content-Type is correct\"] = (postman.getResponseHeader(\"Content-Type\") == \"application/json; charset=utf-8\");",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "{{SERVER}}increment?token={{TOKEN}}&bundle={{BUNDLE_ID}}&build={{BUILD}}&plain={{PLAIN}}",
+					"host": [
+						"{{SERVER}}increment"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "bundle",
+							"value": "{{BUNDLE_ID}}",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "build",
+							"value": "{{BUILD}}",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "plain",
+							"value": "{{PLAIN}}",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Display build number",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"// Status code",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var currentBuild = postman.getEnvironmentVariable(\"BUILD\")",
+							"",
+							"// Token check",
+							"tests[\"Build is bigger or equal 0\"] = (jsonData[\"build\"] >= 0)",
+							"",
+							"// Content type",
+							"tests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");",
+							"tests[\"Content-Type is correct\"] = (postman.getResponseHeader(\"Content-Type\") == \"application/json; charset=utf-8\");",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "{{SERVER}}build?token={{TOKEN}}&bundle={{BUNDLE_ID}}&plain={{PLAIN}}",
+					"host": [
+						"{{SERVER}}build"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "bundle",
+							"value": "{{BUNDLE_ID}}",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "plain",
+							"value": "{{PLAIN}}",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Teapot",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 418\"] = responseCode.code === 418;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{SERVER}}teapot",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "8e7da9e9-df3f-4230-93d3-6878c556135b",
+					"name": "Tea time",
+					"originalRequest": {
+						"url": "{{SERVER}}teapot",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"status": "I'm A Teapot",
+					"code": 418,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "Content-Length",
+							"key": "Content-Length",
+							"value": "46",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Tue, 13 Jun 2017 22:07:06 GMT",
+							"description": "The date and time that the message was sent"
+						}
+					],
+					"cookie": [],
+					"responseTime": "30",
+					"body": "{\"message\":\"I have been brewing for a while!\"}"
+				}
+			]
+		}
+	]
+}

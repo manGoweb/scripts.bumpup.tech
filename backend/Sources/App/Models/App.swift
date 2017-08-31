@@ -57,6 +57,18 @@ final class App: Model, NodeInitializable {
     
 }
 
+// MARK: Helpers
+
+extension App {
+    
+    static func find(bundleId: String) throws -> App? {
+        let query = try App.makeQuery()
+        try query.filter(App.bundleKey, .equals, bundleId)
+        return try query.first()
+    }
+    
+}
+
 // MARK: JSON
 
 extension App: JSONConvertible {

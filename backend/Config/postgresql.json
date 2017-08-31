@@ -1,0 +1,7 @@
+{
+    "hostname": "$PG_HOST:127.0.0.1",
+    "user": "$PG_USER:liveui",
+    "password": "$PG_PASSWORD:aaaaaa",
+    "database": "$PG_DBNAME:bumpup",
+    "port": 5432
+}

@@ -13,6 +13,7 @@ import HTTP
 
 final class History: Model, NodeInitializable {
     
+    static let entity = "history"
     static let foreignIdKey = "history_id"
     
     let storage = Storage()
@@ -96,17 +97,17 @@ extension History: JSONConvertible {
 
 // MARK: Update
 
-//extension History: Updateable {
-//    // Updateable keys are called when `post.update(for: req)` is called.
-//    // Add as many updateable keys as you like here.
-//    public static var updateableKeys: [UpdateableKey<History>] {
-//        return [
-//            UpdateableKey(History.tokenIdKey, String.self) { history, content in
-//                history.tokenId = content
-//            }
-//        ]
-//    }
-//}
+extension History: Updateable {
+    
+    public static var updateableKeys: [UpdateableKey<History>] {
+        return [
+            UpdateableKey(History.tokenIdKey, Identifier.self) { history, content in
+                history.tokenId = content
+            }
+        ]
+    }
+    
+}
 
 // MARK: Fluent Preparation
 

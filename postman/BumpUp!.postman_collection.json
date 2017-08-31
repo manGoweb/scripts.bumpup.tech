@@ -8,6 +8,70 @@
 	},
 	"item": [
 		{
+			"name": "CORS",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Status code",
+							"tests[\"Status code is 204\"] = responseCode.code === 204;",
+							""
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Clean the environment",
+							"postman.clearEnvironmentVariable(\"INITIAL_APP_ID\");",
+							"postman.clearEnvironmentVariable(\"TEST_APP_ID\");",
+							"",
+							"postman.clearEnvironmentVariable(\"INITIAL_VERSION_ID\");",
+							"postman.clearEnvironmentVariable(\"TEST_VERSION_ID\");",
+							"",
+							"postman.clearEnvironmentVariable(\"INITIAL_GROUP_ID\");",
+							"postman.clearEnvironmentVariable(\"TEST_GROUP_ID\");",
+							"",
+							"postman.clearEnvironmentVariable(\"INITIAL_KEY_ID\");",
+							"postman.clearEnvironmentVariable(\"TEST_KEY_ID\");",
+							"",
+							"postman.clearEnvironmentVariable(\"INITIAL_TRANSLATION_ID\");",
+							"postman.clearEnvironmentVariable(\"TEST_TRANSLATION_ID\");",
+							"",
+							"postman.clearEnvironmentVariable(\"CURRENT_TRANSLATION_LANG\")",
+							"postman.clearEnvironmentVariable(\"CURRENT_TRANSLATION_LANG_ID\")",
+							"",
+							"postman.clearEnvironmentVariable(\"INITIAL_API_KEY_ID\");",
+							"postman.clearEnvironmentVariable(\"TEST_APIKEY_ID\");",
+							"",
+							"postman.clearEnvironmentVariable(\"INITIAL_TEAM_ID\");",
+							"postman.clearEnvironmentVariable(\"TEST_TEAM_ID\");",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{SERVER}}",
+				"method": "OPTIONS",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{JWT_AUTH}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "CORS request. Approves all and any headers sent to it. Returns 204 (OK but no data) on success."
+			},
+			"response": []
+		},
+		{
 			"name": "Generate token",
 			"event": [
 				{
@@ -220,7 +284,7 @@
 			},
 			"response": [
 				{
-					"id": "8e7da9e9-df3f-4230-93d3-6878c556135b",
+					"id": "d4b5615f-e3da-45b2-a74c-6db5908d4bc2",
 					"name": "Tea time",
 					"originalRequest": {
 						"url": "{{SERVER}}teapot",
